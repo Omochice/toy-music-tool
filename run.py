@@ -21,12 +21,11 @@ if __name__ == "__main__":
         filename = Path(f)
         if not filename.is_file():
             continue
-        track, artist, title, *etc = filename.stem.split(args.separator)
+        track, title, *etc = filename.stem.split(args.separator)
         album_artist, album_name = filename.parent.name.split(args.separator)
         if args.debug:
             fields = {
                 "track": track,
-                "artist": artist,
                 "title": title,
                 "etc": etc,
                 "album_artist": album_artist,
@@ -36,12 +35,11 @@ if __name__ == "__main__":
         if etc:
             title = title + args.separator + args.separator.join(etc)
             if args.debug:
-                print(f"[DEBUG] music title include {args.separtor} ? : {title}")
+                print(f"[DEBUG] music title include {args.separator} ? : {title}")
 
         album = mutagen.File(filename)
         album["album"] = [album_name]
         album["albumartist"] = [album_artist]
-        album["artist"] = [artist]
         album["title"] = [title]
         if args.dry_run:
             print(f"[DRY RUN] === {filename.name} ===")
