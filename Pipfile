@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 mutagen = "*"
 spotipy = "*"
+requests = "*"
+pillow = "*"
 
 [dev-packages]
 
